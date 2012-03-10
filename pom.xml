@@ -6,7 +6,7 @@
 	<groupId>com.novadart</groupId>
 	<artifactId>novadart-gwt-shared</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.3</version>
+	<version>1.0.4-SNAPSHOT</version>
 	<name>The Novadart GWT library</name>
 
 	<properties>
