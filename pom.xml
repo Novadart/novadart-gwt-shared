@@ -84,12 +84,12 @@
 	<distributionManagement>
 
 		<repository>
-			<id>labs.novadart.com</id>
+			<id>novadart-labs</id>
 			<url>http://labs.novadart.com:8888/archiva/repository/internal/</url>
 		</repository>
 
 		<snapshotRepository>
-			<id>labs.novadart.com</id>
+			<id>novadart-labs</id>
 			<url>http://labs.novadart.com:8888/archiva/repository/snapshots/</url>
 		</snapshotRepository>
 
