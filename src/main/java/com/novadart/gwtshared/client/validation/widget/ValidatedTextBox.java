@@ -4,30 +4,20 @@ import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.user.client.ui.TextBox;
 import com.novadart.gwtshared.client.validation.ValidationBundle;
-import com.novadart.gwtshared.client.validation.widget.resources.ValidationResources;
-import com.novadart.gwtshared.client.validation.widget.resources.ValidationStyle;
 
 public class ValidatedTextBox extends TextBox {
 
 
 	private boolean valid = false;
 	private ValidationBaloonMessage baloonMessage;
-	private final ValidationStyle style;
 	private ValidationBundle validationBundle;
 
 	public ValidatedTextBox(ValidationBundle validationBundle) {
-		this(ValidationResources.get.style());
 		this.validationBundle = validationBundle;
 	}
-	
-	public ValidatedTextBox() {
-		this(ValidationResources.get.style());
-	}
 
-	public ValidatedTextBox(ValidationStyle style) {
-		this.style = style;
-		this.style.ensureInjected();
-		setStyleName(style.validatedTextBox());
+	public ValidatedTextBox() {
+		setStyleName("ValidatedTextBox");
 
 		addBlurHandler(new BlurHandler() {
 
@@ -58,23 +48,23 @@ public class ValidatedTextBox extends TextBox {
 			hideMessage();
 			
 			if(!getText().isEmpty()){
-				removeStyleName(style.validationError());
-				addStyleName(style.validationOk());
+				removeStyleName("ValidatedTextBox-validationError");
+				addStyleName("ValidatedTextBox-validationOk");
 			} else {
-				removeStyleName(style.validationError());
-				removeStyleName(style.validationOk());
+				removeStyleName("ValidatedTextBox-validationError");
+				removeStyleName("ValidatedTextBox-validationOk");
 			}
 		} else {
 			showMessage();
-			removeStyleName(style.validationOk());
-			addStyleName(style.validationError());
+			removeStyleName("ValidatedTextBox-validationOk");
+			addStyleName("ValidatedTextBox-validationError");
 		}
 	}
 
 	public void reset() {
 		setText("");
-		removeStyleName(style.validationError());
-		removeStyleName(style.validationOk());
+		removeStyleName("ValidatedTextBox-validationError");
+		removeStyleName("ValidatedTextBox-validationOk");
 		hideMessage();
 	}
 
@@ -90,7 +80,7 @@ public class ValidatedTextBox extends TextBox {
 			if(errorMessage == null){
 				return;
 			}
-			baloonMessage = new ValidationBaloonMessage(this.style, errorMessage);
+			baloonMessage = new ValidationBaloonMessage(errorMessage);
 		}
 
 		baloonMessage.showNextTo(this);

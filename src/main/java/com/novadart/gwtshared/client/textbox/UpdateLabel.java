@@ -8,7 +8,6 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.novadart.gwtshared.client.textbox.resources.TextBoxResources;
 
 public class UpdateLabel extends Composite {
 	
@@ -37,9 +36,9 @@ public class UpdateLabel extends Composite {
 		
 		container.setWidget(label);
 		initWidget(container);
-		setStyleName(TextBoxResources.get.style().updateLabel());
-		label.setStyleName(TextBoxResources.get.style().updateLabelLabel());
-		textBox.setStyleName(TextBoxResources.get.style().updateLabelTextbox());
+		setStyleName("UpdateLabel");
+		label.setStyleName("UpdateLabel-label");
+		textBox.setStyleName("UpdateLabel-textbox");
 		
 		label.addClickHandler(new ClickHandler() {
 			

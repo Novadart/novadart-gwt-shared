@@ -6,7 +6,6 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.novadart.gwtshared.client.validation.widget.resources.ValidationStyle;
 
 public class ValidationBaloonMessage extends PopupPanel {
 
@@ -20,12 +19,12 @@ public class ValidationBaloonMessage extends PopupPanel {
 	
 	@UiField(provided=true) Label validationMessage;
 	
-	public ValidationBaloonMessage(ValidationStyle style, String message) {
+	public ValidationBaloonMessage(String message) {
 		validationMessage = new Label();
 		validationMessage.setText(message);
-		validationMessage.setStyleName(style.validationMessage());
+		validationMessage.setStyleName("ValidationBaloonMessage-validationMessage");
 		setWidget(uiBinder.createAndBindUi(this));
-		addStyleName(style.validationBaloonMessage());
+		addStyleName("ValidationBaloonMessage");
 	}
 	
 
