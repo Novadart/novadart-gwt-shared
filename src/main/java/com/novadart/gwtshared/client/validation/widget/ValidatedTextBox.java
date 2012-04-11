@@ -3,23 +3,28 @@ package com.novadart.gwtshared.client.validation.widget;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.user.client.ui.TextBox;
+import com.novadart.gwtshared.client.validation.ValidationBundle;
 import com.novadart.gwtshared.client.validation.widget.resources.ValidationResources;
 import com.novadart.gwtshared.client.validation.widget.resources.ValidationStyle;
 
-public abstract class ValidatedTextBox extends TextBox {
+public class ValidatedTextBox extends TextBox {
 
 
 	private boolean valid = false;
 	private ValidationBaloonMessage baloonMessage;
-	private final String errorMessage;
 	private final ValidationStyle style;
+	private ValidationBundle validationBundle;
 
-	public ValidatedTextBox(String errorMessage) {
-		this(ValidationResources.get.style(), errorMessage);
+	public ValidatedTextBox(ValidationBundle validationBundle) {
+		this(ValidationResources.get.style());
+		this.validationBundle = validationBundle;
+	}
+	
+	public ValidatedTextBox() {
+		this(ValidationResources.get.style());
 	}
 
-	public ValidatedTextBox(ValidationStyle style, String errorMessage) {
-		this.errorMessage = errorMessage;
+	public ValidatedTextBox(ValidationStyle style) {
 		this.style = style;
 		this.style.ensureInjected();
 		setStyleName(style.validatedTextBox());
@@ -32,16 +37,22 @@ public abstract class ValidatedTextBox extends TextBox {
 		});
 	}
 	
+	public void setValidationBundle(ValidationBundle validationBundle) {
+		this.validationBundle = validationBundle;
+	}
+	
 	@Override
 	protected void onUnload() {
 		super.onUnload();
 		hideMessage();
 	}
 
-	protected abstract boolean validate(String text);
-
 	public void validate(){
-		valid = validate(getText());
+		if(validationBundle != null){
+			valid = validationBundle.isValid(getText());
+		} else {
+			valid = true;
+		}
 
 		if(valid){
 			hideMessage();
@@ -75,7 +86,11 @@ public abstract class ValidatedTextBox extends TextBox {
 
 	private void showMessage(){
 		if(baloonMessage == null){
-			baloonMessage = new ValidationBaloonMessage(this.style, this.errorMessage);
+			String errorMessage = validationBundle.getErrorMessage();
+			if(errorMessage == null){
+				return;
+			}
+			baloonMessage = new ValidationBaloonMessage(this.style, errorMessage);
 		}
 
 		baloonMessage.showNextTo(this);

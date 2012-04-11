@@ -33,6 +33,9 @@ public class Validate {
 		}
 	}
 	
+	public static boolean isEmpty(String value){
+		return value==null || value.isEmpty();
+	}	
 	
 	private static final RegExp EMAIL_REGEXp =
 			RegExp.compile("[_A-Za-z0-9-]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})");
