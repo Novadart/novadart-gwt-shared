@@ -5,39 +5,55 @@ import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.uibinder.client.UiConstructor;
+import com.novadart.gwtshared.client.validation.ValidationBundle;
 import com.novadart.gwtshared.client.validation.widget.ValidatedTextBox;
 
 public class RichTextBox extends ValidatedTextBox {
-	
+
 	private final String label;
-	
-	public @UiConstructor RichTextBox(String label) {
-		this.label = label != null ? label : "";
-		
+
+	public RichTextBox(String label, ValidationBundle validationBundle) {
+		this.label = label != null ? label.trim() : "";
+		setValidationBundle(validationBundle);
+
 		addBlurHandler(new BlurHandler() {
-			
+
 			@Override
 			public void onBlur(BlurEvent event) {
-				if(getText().equalsIgnoreCase("")){
+				if(RichTextBox.super.getText().equalsIgnoreCase("")){
 					setText(RichTextBox.this.label);
+					addStyleName("RichTextBox-labelStyle");
 				}
-				addStyleName("empty");
 			}
 		});
-		
+
 		addFocusHandler(new FocusHandler() {
-			
+
 			@Override
 			public void onFocus(FocusEvent event) {
-				if(getText().equalsIgnoreCase(RichTextBox.this.label)){
+				if(RichTextBox.super.getText().equalsIgnoreCase(RichTextBox.this.label)){
 					setText("");
 				}
-				removeStyleName("empty");
+				removeStyleName("RichTextBox-labelStyle");
 			}
 		});
-		
+
 		setText(label);
-		addStyleName("empty");
+		addStyleName("RichTextBox RichTextBox-labelStyle");
+	}
+
+	public @UiConstructor RichTextBox(String label) {
+		this(label, null);
+	}
+	
+	@Override
+	public String getText() {
+		String text = super.getText();
+		if(text.trim().equalsIgnoreCase(label)){
+			return "";
+		} else {
+			return text;
+		}
 	}
 
 }
