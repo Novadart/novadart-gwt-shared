@@ -14,9 +14,7 @@ public class ValidatedTextBox extends TextBox {
 
 	public ValidatedTextBox(ValidationBundle validationBundle) {
 		this.validationBundle = validationBundle;
-	}
-
-	public ValidatedTextBox() {
+		
 		setStyleName("ValidatedTextBox");
 
 		addBlurHandler(new BlurHandler() {
@@ -25,6 +23,10 @@ public class ValidatedTextBox extends TextBox {
 				validate();
 			}
 		});
+	}
+
+	public ValidatedTextBox() {
+		this(null);
 	}
 	
 	public void setValidationBundle(ValidationBundle validationBundle) {
