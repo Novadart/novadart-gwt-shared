@@ -80,4 +80,8 @@ public class ValidatedListBox extends ValidatedWidget<ListBox, Integer> {
 	public void addItem(String item){
 		listBox.addItem(item);
 	}
+	
+	public void setEnabled(boolean enabled){
+		listBox.setEnabled(enabled);
+	}
 }

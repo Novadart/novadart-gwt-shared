@@ -47,6 +47,14 @@ public class ValidatedTextBox extends ValidatedWidget<TextBox, String> implement
 	public void setText(String text) {
 		textBox.setText(text);
 	}
+	
+	public void setReadOnly(boolean readonly){
+		textBox.setReadOnly(readonly);
+	}
+	
+	public void setEnabled(boolean enabled){
+		textBox.setEnabled(enabled);
+	}
 
 	@Override
 	public HandlerRegistration addFocusHandler(FocusHandler handler) {
