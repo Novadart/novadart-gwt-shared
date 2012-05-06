@@ -1,6 +1,6 @@
 package com.novadart.gwtshared.client.validation;
 
-public interface ValidationBundle {
-	public boolean isValid(String text);
+public interface ValidationBundle<ValueType> {
+	public boolean isValid(ValueType value);
 	public String getErrorMessage();
 }

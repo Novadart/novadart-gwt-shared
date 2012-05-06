@@ -12,7 +12,7 @@ public class RichTextBox extends ValidatedTextBox {
 
 	private final String label;
 
-	public RichTextBox(String label, ValidationBundle validationBundle) {
+	public RichTextBox(String label, ValidationBundle<String> validationBundle) {
 		this.label = label != null ? label.trim() : "";
 		setValidationBundle(validationBundle);
 
