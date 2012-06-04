@@ -16,8 +16,8 @@
 	</properties>
 
 	<scm>
-		<connection>scm:git:ssh://gitolite@labs.novadart.com/novadart/novadart-gwt-shared.git</connection>
-		<developerConnection>scm:git:ssh://gitolite@labs.novadart.com/novadart/novadart-gwt-shared.git</developerConnection>
+		<connection>scm:git:ssh://gitolite@scm.dev.novadart.com/novadart/novadart-gwt-shared.git</connection>
+		<developerConnection>scm:git:ssh://gitolite@scm.dev.novadart.com/novadart/novadart-gwt-shared.git</developerConnection>
 	</scm>
 
 	<dependencies>
@@ -83,13 +83,13 @@
 	<distributionManagement>
 
 		<repository>
-			<id>novadart-labs</id>
-			<url>http://labs.novadart.com:8888/archiva/repository/internal/</url>
+			<id>novadart-build</id>
+			<url>http://build.dev.novadart.com/archiva/repository/internal/</url>
 		</repository>
 
 		<snapshotRepository>
-			<id>novadart-labs</id>
-			<url>http://labs.novadart.com:8888/archiva/repository/snapshots/</url>
+			<id>novadart-build</id>
+			<url>http://build.dev.novadart.com/archiva/repository/snapshots/</url>
 		</snapshotRepository>
 
 
