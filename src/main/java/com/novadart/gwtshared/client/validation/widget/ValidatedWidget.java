@@ -90,14 +90,26 @@ public abstract class ValidatedWidget<W extends HasBlurHandlers, ValueType> exte
 	}
 
 	private void showMessage(){
-		if(baloonMessage == null){
-			String errorMessage = validationBundle.getErrorMessage();
-			if(errorMessage == null){
-				return;
-			}
-			baloonMessage = new ValidationBaloonMessage(errorMessage);
+		String errorMessage = validationBundle.getErrorMessage();
+		showMessage(errorMessage);
+	}
+	
+	public void showMessage(String errorMessage){
+		if(errorMessage == null){
+			return;
 		}
-
+		
+		if(baloonMessage == null){
+			baloonMessage = new ValidationBaloonMessage();
+		}
+		
+		baloonMessage.setMessage(errorMessage);
+		if(getStyleName().contains("ValidatedWidget-validationOk")){
+			removeStyleName("ValidatedWidget-validationOk");
+		}
+		if(!getStyleName().contains("ValidatedWidget-validationError")){
+			addStyleName("ValidatedWidget-validationError");
+		}
 		baloonMessage.showNextTo(this);
 	}
 

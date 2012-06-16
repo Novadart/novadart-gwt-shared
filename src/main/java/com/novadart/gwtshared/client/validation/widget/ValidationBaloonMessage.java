@@ -19,6 +19,10 @@ public class ValidationBaloonMessage extends PopupPanel {
 	
 	@UiField(provided=true) Label validationMessage;
 	
+	public ValidationBaloonMessage() {
+		this("");
+	}
+	
 	public ValidationBaloonMessage(String message) {
 		validationMessage = new Label();
 		validationMessage.setText(message);
@@ -27,6 +31,9 @@ public class ValidationBaloonMessage extends PopupPanel {
 		addStyleName("ValidationBaloonMessage");
 	}
 	
+	public void setMessage(String message){
+		validationMessage.setText(message);
+	}
 
 	public void showNextTo(final Widget widget){
 		setPopupPositionAndShow(new PositionCallback() {
