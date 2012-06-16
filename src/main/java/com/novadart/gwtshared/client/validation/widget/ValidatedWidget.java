@@ -66,7 +66,7 @@ public abstract class ValidatedWidget<W extends HasBlurHandlers, ValueType> exte
 			addStyleName("ValidatedWidget-validationOk");
 			
 		} else {
-			showMessage();
+			showErrorMessage();
 			
 			removeStyleName("ValidatedWidget-validationOk");
 			addStyleName("ValidatedWidget-validationError");
@@ -89,12 +89,12 @@ public abstract class ValidatedWidget<W extends HasBlurHandlers, ValueType> exte
 		}
 	}
 
-	private void showMessage(){
+	public void showErrorMessage(){
 		String errorMessage = validationBundle.getErrorMessage();
-		showMessage(errorMessage);
+		showErrorMessage(errorMessage);
 	}
 	
-	public void showMessage(String errorMessage){
+	public void showErrorMessage(String errorMessage){
 		if(errorMessage == null){
 			return;
 		}
