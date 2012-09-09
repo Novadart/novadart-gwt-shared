@@ -41,6 +41,11 @@ public class RichTextBox extends ValidatedTextBox {
 		setText(label);
 		addStyleName("RichTextBox RichTextBox-labelStyle");
 	}
+	
+	@Override
+	protected void resetUI() {
+		setText(label);
+	}
 
 	public @UiConstructor RichTextBox(String label) {
 		this(label, null);

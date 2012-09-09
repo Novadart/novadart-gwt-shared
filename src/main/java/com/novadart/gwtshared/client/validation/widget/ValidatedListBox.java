@@ -9,7 +9,7 @@ public class ValidatedListBox extends ValidatedWidget<ListBox, Integer> {
 		private final String errorMessage;
 		
 		public ValidatedListBoxBundle(String errorMessage) {
-			this.errorMessage = errorMessage==null ? "" : errorMessage;
+			this.errorMessage = errorMessage;
 		}
 		
 		@Override
@@ -25,6 +25,10 @@ public class ValidatedListBox extends ValidatedWidget<ListBox, Integer> {
 	}
 
 	private final ListBox listBox = new ListBox();
+	
+	public ValidatedListBox() {
+		this(null);
+	}
 	
 	public ValidatedListBox(String errorMessage) {
 		super(new ValidatedListBoxBundle(errorMessage));
