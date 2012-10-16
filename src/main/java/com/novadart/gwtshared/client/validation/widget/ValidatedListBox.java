@@ -85,8 +85,16 @@ public class ValidatedListBox extends ValidatedWidget<ListBox, Integer> {
 		return listBox.getItemText(listBox.getSelectedIndex());
 	}
 	
+	public String getSelectedItemValue(){
+		return listBox.getValue(listBox.getSelectedIndex());
+	}
+	
 	public void addItem(String item){
 		listBox.addItem(item);
+	}
+	
+	public void addItem(String item, String value){
+		listBox.addItem(item, value);
 	}
 	
 	public void setEnabled(boolean enabled){
