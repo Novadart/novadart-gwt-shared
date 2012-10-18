@@ -56,7 +56,7 @@ public abstract class ValidatedWidget<W extends HasBlurHandlers, ValueType> exte
 		if(validationBundle != null){
 			valid = validationBundle.isValid(getValue());
 		} else {
-			valid = true;
+			return;
 		}
 
 		if(valid){

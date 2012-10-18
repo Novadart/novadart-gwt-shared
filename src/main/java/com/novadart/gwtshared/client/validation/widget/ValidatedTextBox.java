@@ -4,12 +4,16 @@ import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.dom.client.HasBlurHandlers;
 import com.google.gwt.event.dom.client.HasFocusHandlers;
+import com.google.gwt.event.dom.client.HasKeyUpHandlers;
+import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.TextBox;
 import com.novadart.gwtshared.client.validation.ValidationBundle;
 
-public class ValidatedTextBox extends ValidatedWidget<TextBox, String> implements HasText, HasBlurHandlers, HasFocusHandlers {
+public class ValidatedTextBox extends ValidatedWidget<TextBox, String> 
+	implements HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusable {
 	
 	private final TextBox textBox = new TextBox();
 	
@@ -64,6 +68,31 @@ public class ValidatedTextBox extends ValidatedWidget<TextBox, String> implement
 	@Override
 	public HandlerRegistration addBlurHandler(BlurHandler handler) {
 		return textBox.addBlurHandler(handler);
+	}
+
+	@Override
+	public HandlerRegistration addKeyUpHandler(KeyUpHandler handler) {
+		return textBox.addKeyUpHandler(handler);
+	}
+
+	@Override
+	public int getTabIndex() {
+		return textBox.getTabIndex();
+	}
+
+	@Override
+	public void setAccessKey(char key) {
+		textBox.setAccessKey(key);
+	}
+
+	@Override
+	public void setFocus(boolean focused) {
+		textBox.setFocus(focused);
+	}
+
+	@Override
+	public void setTabIndex(int index) {
+		textBox.setTabIndex(index);
 	}
 
 }

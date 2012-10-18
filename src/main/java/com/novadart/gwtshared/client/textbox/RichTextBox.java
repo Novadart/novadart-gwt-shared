@@ -12,6 +12,10 @@ public class RichTextBox extends ValidatedTextBox {
 
 	private final String label;
 
+	public @UiConstructor RichTextBox(String label) {
+		this(label, null);
+	}
+	
 	public RichTextBox(String label, ValidationBundle<String> validationBundle) {
 		this.label = label != null ? label.trim() : "";
 		setValidationBundle(validationBundle);
@@ -47,10 +51,6 @@ public class RichTextBox extends ValidatedTextBox {
 		setText(label);
 	}
 
-	public @UiConstructor RichTextBox(String label) {
-		this(label, null);
-	}
-	
 	@Override
 	public String getText() {
 		String text = super.getText();
