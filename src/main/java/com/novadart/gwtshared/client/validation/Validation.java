@@ -8,10 +8,16 @@ public class Validation {
 			RegExp.compile("^\\d+$");
 
 	public static boolean isPositiveNumber(String value){
+		if(value == null){
+			return false;
+		}
 		return POSITIVE_NUMBER_REGEXP.exec(value) != null;
 	}
 
 	public static boolean isInteger(String value){
+		if(value == null){
+			return false;
+		}
 		try{
 			Integer.parseInt(value);
 			return true;
@@ -21,6 +27,9 @@ public class Validation {
 	}
 
 	public static boolean isFloat(String value){
+		if(value == null){
+			return false;
+		}
 		try{
 			Float.parseFloat(value);
 			return true;
@@ -31,6 +40,9 @@ public class Validation {
 
 
 	public static boolean isDouble(String value){
+		if(value == null){
+			return false;
+		}
 		try{
 			Double.parseDouble(value);
 			return true;
