@@ -77,6 +77,19 @@ public class ValidatedListBox extends ValidatedWidget<ListBox, Integer> {
 		listBox.setSelectedIndex(selectedIndex);
 	}
 	
+	public void setSelectedItemByValue(String value){
+		int selectedIndex = 0;
+		if(value != null) {
+			for (int i=0; i<listBox.getItemCount(); i++) {
+				if(value.equalsIgnoreCase(listBox.getValue(i))){
+					selectedIndex = i;
+					break;
+				}
+			}
+		}
+		listBox.setSelectedIndex(selectedIndex);
+	}
+	
 	public String getItemText(int index){
 		return listBox.getItemText(index);
 	}
