@@ -83,12 +83,14 @@
 
 	<distributionManagement>
 		<repository>
-			<id>internal</id>
-			<url>http://build.dev.novadart.com/archiva/repository/internal/</url>
+			<id>nexus</id>
+			<name>Releases repo</name>
+			<url>http://build.dev.novadart.com:8081/nexus/content/repositories/releases</url>
 		</repository>
 		<snapshotRepository>
-			<id>snapshots</id>
-			<url>http://build.dev.novadart.com/archiva/repository/snapshots/</url>
+			<id>nexus</id>
+			<name>Snapshots repo</name>
+			<url>http://build.dev.novadart.com:8081/nexus/content/repositories/snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
 
