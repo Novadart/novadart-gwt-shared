@@ -50,6 +50,19 @@ public class RichTextBox extends ValidatedTextBox {
 	protected void resetUI() {
 		setText(label);
 	}
+	
+	@Override
+	public void setText(String text) {
+		if(text == null){
+			return;
+		}
+		
+		if(! text.equalsIgnoreCase(label)){
+			removeStyleName("RichTextBox-labelStyle");
+		}
+		
+		super.setText(text);
+	}
 
 	@Override
 	public String getText() {
