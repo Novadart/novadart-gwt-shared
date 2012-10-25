@@ -1,9 +1,12 @@
 package com.novadart.gwtshared.client.validation.widget;
 
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.HasChangeHandlers;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.ListBox;
 import com.novadart.gwtshared.client.validation.ValidationBundle;
 
-public class ValidatedListBox extends ValidatedWidget<ListBox, Integer> {
+public class ValidatedListBox extends ValidatedWidget<ListBox, Integer> implements HasChangeHandlers {
 	
 	private static class ValidatedListBoxBundle implements ValidationBundle<Integer>{
 		private final String errorMessage;
@@ -112,5 +115,10 @@ public class ValidatedListBox extends ValidatedWidget<ListBox, Integer> {
 	
 	public void setEnabled(boolean enabled){
 		listBox.setEnabled(enabled);
+	}
+
+	@Override
+	public HandlerRegistration addChangeHandler(ChangeHandler handler) {
+		return listBox.addChangeHandler(handler);
 	}
 }
