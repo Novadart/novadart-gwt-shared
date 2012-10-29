@@ -13,10 +13,10 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.novadart.gwtshared.client.validation.ValidationBundle;
 
 public class ValidatedTextBox extends ValidatedWidget<TextBox, String> 
-	implements HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusable {
-	
+implements HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusable {
+
 	private final TextBox textBox = new TextBox();
-	
+
 	public ValidatedTextBox(ValidationBundle<String> validationBundle) {
 		super(validationBundle);
 		initWidget(textBox);
@@ -26,17 +26,17 @@ public class ValidatedTextBox extends ValidatedWidget<TextBox, String>
 	public ValidatedTextBox() {
 		this(null);
 	}
-	
+
 	@Override
 	protected void resetUI() {
 		setText("");
 	}
-	
+
 	@Override
 	protected void updateUI(boolean isValid) {
-		
+
 	}
-	
+
 	@Override
 	protected String getValue() {
 		return getText();
@@ -51,11 +51,11 @@ public class ValidatedTextBox extends ValidatedWidget<TextBox, String>
 	public void setText(String text) {
 		textBox.setText(text);
 	}
-	
+
 	public void setReadOnly(boolean readonly){
 		textBox.setReadOnly(readonly);
 	}
-	
+
 	public void setEnabled(boolean enabled){
 		textBox.setEnabled(enabled);
 	}
@@ -95,4 +95,7 @@ public class ValidatedTextBox extends ValidatedWidget<TextBox, String>
 		textBox.setTabIndex(index);
 	}
 
+	public void setMaxLength(int length) {
+		textBox.setMaxLength(length);
+	}
 }
