@@ -1,5 +1,6 @@
 package com.novadart.gwtshared.client.validation.widget;
 
+import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.dom.client.HasBlurHandlers;
@@ -36,9 +37,21 @@ HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusable {
 					showErrorMessage(textValidationBundle);
 				} else {
 					hideMessage();
+					removeValidationStyles();
 				}
 			}
+			
 		});
+		
+		addBlurHandler(new BlurHandler() {
+			
+			@Override
+			public void onBlur(BlurEvent event) {
+				hideMessage();
+				removeValidationStyles();
+			}
+		});
+		
 		addStyleName("ValidatedTextArea");
 	}
 	

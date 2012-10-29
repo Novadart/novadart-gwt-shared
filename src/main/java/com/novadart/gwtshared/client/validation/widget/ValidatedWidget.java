@@ -98,8 +98,7 @@ public abstract class ValidatedWidget<W extends HasBlurHandlers, ValueType> exte
 
 	public void reset() {
 		valid = false;
-		removeStyleName("ValidatedWidget-validationError");
-		removeStyleName("ValidatedWidget-validationOk");
+		removeValidationStyles();
 		hideMessage();
 		resetUI();
 	}
@@ -108,6 +107,11 @@ public abstract class ValidatedWidget<W extends HasBlurHandlers, ValueType> exte
 		if(baloonMessage != null){
 			baloonMessage.hide();
 		}
+	}
+	
+	protected void removeValidationStyles(){
+		removeStyleName("ValidatedWidget-validationError");
+		removeStyleName("ValidatedWidget-validationOk");
 	}
 
 	protected void showErrorMessage(ValidationBundle<ValueType> failingValidationBundle){
