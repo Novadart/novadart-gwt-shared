@@ -82,15 +82,10 @@ public abstract class ValidatedWidget<W extends HasBlurHandlers, ValueType> exte
 
 		if(valid){
 			hideMessage();
-
-			removeStyleName("ValidatedWidget-validationError");
-			addStyleName("ValidatedWidget-validationOk");
-
+			setValidationOkStyle();
 		} else {
 			showErrorMessage(failingValidationBundle);
-
-			removeStyleName("ValidatedWidget-validationOk");
-			addStyleName("ValidatedWidget-validationError");
+			setValidationErrorStyle();
 		}
 
 		updateUI(valid);
@@ -112,6 +107,16 @@ public abstract class ValidatedWidget<W extends HasBlurHandlers, ValueType> exte
 	protected void removeValidationStyles(){
 		removeStyleName("ValidatedWidget-validationError");
 		removeStyleName("ValidatedWidget-validationOk");
+	}
+	
+	public void setValidationErrorStyle(){
+		removeStyleName("ValidatedWidget-validationOk");
+		addStyleName("ValidatedWidget-validationError");
+	}
+	
+	public void setValidationOkStyle(){
+		removeStyleName("ValidatedWidget-validationError");
+		addStyleName("ValidatedWidget-validationOk");
 	}
 
 	protected void showErrorMessage(ValidationBundle<ValueType> failingValidationBundle){
