@@ -104,13 +104,13 @@ public abstract class ValidatedWidget<W extends HasBlurHandlers, ValueType> exte
 		resetUI();
 	}
 
-	private void hideMessage(){
+	protected void hideMessage(){
 		if(baloonMessage != null){
 			baloonMessage.hide();
 		}
 	}
 
-	public void showErrorMessage(ValidationBundle<ValueType> failingValidationBundle){
+	protected void showErrorMessage(ValidationBundle<ValueType> failingValidationBundle){
 		String errorMessage = failingValidationBundle.getErrorMessage();
 		showErrorMessage(errorMessage);
 	}

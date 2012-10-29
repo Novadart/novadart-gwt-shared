@@ -34,6 +34,8 @@ HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusable {
 				if(!textValidationBundle.isValid(getText())){
 					setText(getText().substring(0, textValidationBundle.getMaxLength()));
 					showErrorMessage(textValidationBundle);
+				} else {
+					hideMessage();
 				}
 			}
 		});
