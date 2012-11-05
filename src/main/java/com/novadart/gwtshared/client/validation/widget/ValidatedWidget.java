@@ -98,7 +98,7 @@ public abstract class ValidatedWidget<W extends HasBlurHandlers, ValueType> exte
 		resetUI();
 	}
 
-	protected void hideMessage(){
+	public void hideMessage(){
 		if(baloonMessage != null){
 			baloonMessage.hide();
 		}
