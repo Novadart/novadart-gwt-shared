@@ -18,7 +18,7 @@ public class RichTextBox extends ValidatedTextBox {
 	
 	public RichTextBox(String label, ValidationBundle<String> validationBundle) {
 		this.label = label != null ? label.trim() : "";
-		addValidationBundle(validationBundle);
+		setValidationBundle(validationBundle);
 
 		addBlurHandler(new BlurHandler() {
 

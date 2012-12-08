@@ -59,6 +59,11 @@ implements HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusab
 	public void setEnabled(boolean enabled){
 		textBox.setEnabled(enabled);
 	}
+	
+	@Override
+	public boolean isEmpty() {
+		return getText().isEmpty();
+	}
 
 	@Override
 	public HandlerRegistration addFocusHandler(FocusHandler handler) {

@@ -116,6 +116,11 @@ public class ValidatedListBox extends ValidatedWidget<ListBox, Integer> implemen
 	public void setEnabled(boolean enabled){
 		listBox.setEnabled(enabled);
 	}
+	
+	@Override
+	public boolean isEmpty() {
+		return getSelectedIndex() == 0;
+	}
 
 	@Override
 	public HandlerRegistration addChangeHandler(ChangeHandler handler) {

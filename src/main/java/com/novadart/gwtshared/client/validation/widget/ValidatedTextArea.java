@@ -115,5 +115,9 @@ HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusable {
 		textArea.setText(text);
 	}
 	
+	@Override
+	public boolean isEmpty() {
+		return getText().isEmpty();
+	}
 
 }

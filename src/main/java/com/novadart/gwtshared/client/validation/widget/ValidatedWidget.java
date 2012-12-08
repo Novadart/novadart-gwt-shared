@@ -1,8 +1,5 @@
 package com.novadart.gwtshared.client.validation.widget;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.HasBlurHandlers;
@@ -14,13 +11,18 @@ import com.novadart.gwtshared.client.validation.ValidationBundle;
 public abstract class ValidatedWidget<W extends HasBlurHandlers, ValueType> extends Composite {
 
 	private boolean valid = false;
+	private boolean showMessageOnError = true;
 	private ValidationBaloonMessage baloonMessage;
-	private List<ValidationBundle<ValueType>> validationBundleList;
+	private ValidationBundle<ValueType> validationBundle;
 
 	public ValidatedWidget(ValidationBundle<ValueType> validationBundle) {
 		if(validationBundle != null) {
-			addValidationBundle(validationBundle);
+			setValidationBundle(validationBundle);
 		}
+	}
+	
+	public void setShowMessageOnError(boolean showMessageOnError) {
+		this.showMessageOnError = showMessageOnError;
 	}
 
 	@Override
@@ -41,15 +43,12 @@ public abstract class ValidatedWidget<W extends HasBlurHandlers, ValueType> exte
 		this(null);
 	}
 
-	public void addValidationBundle(ValidationBundle<ValueType> validationBundle) {
+	public void setValidationBundle(ValidationBundle<ValueType> validationBundle) {
 		if(validationBundle == null) {
 			return;
 		}
-		
-		if(validationBundleList == null){
-			validationBundleList = new ArrayList<ValidationBundle<ValueType>>();
-		}
-		this.validationBundleList.add(validationBundle);
+
+		this.validationBundle =validationBundle;
 	}
 
 	@Override
@@ -64,27 +63,24 @@ public abstract class ValidatedWidget<W extends HasBlurHandlers, ValueType> exte
 
 	protected abstract ValueType getValue();
 
+	public abstract boolean isEmpty();
+
 	public void validate(){
-		if(validationBundleList == null){
-			valid = true;
+		valid = true;
+
+		if(validationBundle == null){
 			return;
 		}
 
-		ValidationBundle<ValueType> failingValidationBundle = null;
-
-		for (ValidationBundle<ValueType> vb : validationBundleList) {
-			valid = vb.isValid(getValue());
-			if(!valid) {
-				failingValidationBundle = vb;
-				break;
-			}
-		}
+		valid = validationBundle.isValid(getValue());
 
 		if(valid){
 			hideMessage();
 			setValidationOkStyle();
 		} else {
-			showErrorMessage(failingValidationBundle);
+			if(this.showMessageOnError){
+				showErrorMessage(validationBundle.getErrorMessage());
+			}
 			setValidationErrorStyle();
 		}
 
@@ -103,17 +99,17 @@ public abstract class ValidatedWidget<W extends HasBlurHandlers, ValueType> exte
 			baloonMessage.hide();
 		}
 	}
-	
+
 	protected void removeValidationStyles(){
 		removeStyleName("ValidatedWidget-validationError");
 		removeStyleName("ValidatedWidget-validationOk");
 	}
-	
+
 	public void setValidationErrorStyle(){
 		removeStyleName("ValidatedWidget-validationOk");
 		addStyleName("ValidatedWidget-validationError");
 	}
-	
+
 	public void setValidationOkStyle(){
 		removeStyleName("ValidatedWidget-validationError");
 		addStyleName("ValidatedWidget-validationOk");
