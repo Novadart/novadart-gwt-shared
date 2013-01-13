@@ -10,13 +10,14 @@ import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Focusable;
+import com.google.gwt.user.client.ui.HasEnabled;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.TextArea;
 import com.novadart.gwtshared.client.validation.TextLengthValidation;
 import com.novadart.gwtshared.client.validation.ValidationBundle;
 
 public class ValidatedTextArea extends ValidatedWidget<TextArea, String> implements 
-HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusable {
+HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusable, HasEnabled {
 
 	private final TextArea textArea = new TextArea();
 	
@@ -118,6 +119,16 @@ HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusable {
 	@Override
 	public boolean isEmpty() {
 		return getText().isEmpty();
+	}
+	
+	@Override
+	public boolean isEnabled() {
+		return textArea.isEnabled();
+	}
+	
+	@Override
+	public void setEnabled(boolean enabled) {
+		textArea.setEnabled(enabled);
 	}
 
 }

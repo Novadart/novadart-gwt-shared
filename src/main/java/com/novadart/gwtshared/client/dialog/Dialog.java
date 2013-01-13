@@ -4,13 +4,13 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 
-public class Dialog extends DialogBox {
+public class Dialog extends PopupPanel {
 	private static final int HEIGHT_DIVISION_VALUE = 2;
 	private static final int WIDTH_DIVISION_VALUE = 2;
 
