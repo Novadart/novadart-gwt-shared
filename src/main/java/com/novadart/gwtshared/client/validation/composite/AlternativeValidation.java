@@ -20,6 +20,7 @@ public abstract class AlternativeValidation extends CompositeValidation {
 			
 			if(w.isEmpty()){
 				w.setValidationOkStyle();
+				w.hideMessage(); //in case the baloon is shown
 			} else {
 				w.validate();
 				
