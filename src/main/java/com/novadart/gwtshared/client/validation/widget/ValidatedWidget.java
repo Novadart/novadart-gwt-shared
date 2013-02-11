@@ -3,22 +3,41 @@ package com.novadart.gwtshared.client.validation.widget;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.HasBlurHandlers;
+import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.novadart.gwtshared.client.validation.ValidationBundle;
 
 public abstract class ValidatedWidget<W extends HasBlurHandlers, ValueType> extends Composite {
-
+	
+	public static interface Style extends CssResource {
+		String validationOk();
+		String validationError();
+		String validationBaloon();
+		String validationMessage();
+	}
+	
+	private final Style style;
 	private boolean valid = false;
 	private boolean showMessageOnError = true;
 	private ValidationBaloonMessage baloonMessage;
 	private ValidationBundle<ValueType> validationBundle;
 
-	public ValidatedWidget(ValidationBundle<ValueType> validationBundle) {
+	public ValidatedWidget(Style style) {
+		this(style, null);
+	}
+	
+	public ValidatedWidget(Style style, ValidationBundle<ValueType> validationBundle) {
 		if(validationBundle != null) {
 			setValidationBundle(validationBundle);
 		}
+		this.style = style;
+		this.style.ensureInjected();
+	}
+	
+	protected Style getStyle() {
+		return style;
 	}
 	
 	public void setShowMessageOnError(boolean showMessageOnError) {
@@ -29,18 +48,12 @@ public abstract class ValidatedWidget<W extends HasBlurHandlers, ValueType> exte
 	protected void initWidget(Widget widget) {
 		super.initWidget(widget);
 
-		setStyleName("ValidatedWidget");
-
 		((FocusWidget)getWidget()).addBlurHandler(new BlurHandler() {
 
 			public void onBlur(BlurEvent event) {
 				validate();
 			}
 		});
-	}
-
-	public ValidatedWidget() {
-		this(null);
 	}
 
 	public void setValidationBundle(ValidationBundle<ValueType> validationBundle) {
@@ -101,18 +114,18 @@ public abstract class ValidatedWidget<W extends HasBlurHandlers, ValueType> exte
 	}
 
 	protected void removeValidationStyles(){
-		removeStyleName("ValidatedWidget-validationError");
-		removeStyleName("ValidatedWidget-validationOk");
+		removeStyleName(style.validationError());
+		removeStyleName(style.validationOk());
 	}
 
 	public void setValidationErrorStyle(){
-		removeStyleName("ValidatedWidget-validationOk");
-		addStyleName("ValidatedWidget-validationError");
+		removeStyleName(style.validationOk());
+		addStyleName(style.validationError());
 	}
 
 	public void setValidationOkStyle(){
-		removeStyleName("ValidatedWidget-validationError");
-		addStyleName("ValidatedWidget-validationOk");
+		removeStyleName(style.validationError());
+		addStyleName(style.validationOk());
 	}
 
 	protected void showErrorMessage(ValidationBundle<ValueType> failingValidationBundle){
@@ -126,15 +139,15 @@ public abstract class ValidatedWidget<W extends HasBlurHandlers, ValueType> exte
 		}
 
 		if(baloonMessage == null){
-			baloonMessage = new ValidationBaloonMessage();
+			baloonMessage = new ValidationBaloonMessage(style);
 		}
 
 		baloonMessage.setMessage(errorMessage);
-		if(getStyleName().contains("ValidatedWidget-validationOk")){
-			removeStyleName("ValidatedWidget-validationOk");
+		if(getStyleName().contains(style.validationOk())){
+			removeStyleName(style.validationOk());
 		}
-		if(!getStyleName().contains("ValidatedWidget-validationError")){
-			addStyleName("ValidatedWidget-validationError");
+		if(!getStyleName().contains(style.validationError())){
+			addStyleName(style.validationError());
 		}
 		baloonMessage.showNextTo(this);
 	}

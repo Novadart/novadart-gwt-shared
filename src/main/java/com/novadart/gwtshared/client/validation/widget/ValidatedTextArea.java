@@ -21,12 +21,12 @@ HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusable, HasEnab
 
 	private final TextArea textArea = new TextArea();
 	
-	public ValidatedTextArea(TextLengthValidation textValidationBundle) {
-		this(textValidationBundle, null);
+	public ValidatedTextArea(Style style, TextLengthValidation textValidationBundle) {
+		this(style, textValidationBundle, null);
 	}
 	
-	public ValidatedTextArea(final TextLengthValidation textValidationBundle, ValidationBundle<String> validationBundle) {
-		super(validationBundle);
+	public ValidatedTextArea(Style style, final TextLengthValidation textValidationBundle, ValidationBundle<String> validationBundle) {
+		super(style, validationBundle);
 		initWidget(textArea);
 		
 		addKeyUpHandler(new KeyUpHandler() {
@@ -52,8 +52,6 @@ HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusable, HasEnab
 				removeValidationStyles();
 			}
 		});
-		
-		addStyleName("ValidatedTextArea");
 	}
 	
 	

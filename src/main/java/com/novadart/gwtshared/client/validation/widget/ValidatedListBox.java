@@ -29,16 +29,16 @@ public class ValidatedListBox extends ValidatedWidget<ListBox, Integer> implemen
 
 	private final ListBox listBox = new ListBox();
 	
-	public ValidatedListBox() {
-		this("", null);
+	public ValidatedListBox(Style style) {
+		this(style, "", null);
 	}
 	
-	public ValidatedListBox(String errorMessage) {
-		this("", errorMessage);
+	public ValidatedListBox(Style style, String errorMessage) {
+		this(style, "", errorMessage);
 	}
 	
-	public ValidatedListBox(String defaultItem, String errorMessage) {
-		super(new ValidatedListBoxBundle(errorMessage));
+	public ValidatedListBox(Style style, String defaultItem, String errorMessage) {
+		super(style, new ValidatedListBoxBundle(errorMessage));
 		listBox.addItem(defaultItem);
 		initWidget(listBox);
 		addStyleName("ValidatedListBox");

@@ -9,14 +9,19 @@ import com.novadart.gwtshared.client.validation.ValidationBundle;
 import com.novadart.gwtshared.client.validation.widget.ValidatedTextBox;
 
 public class RichTextBox extends ValidatedTextBox {
+	
+	public static interface Style extends ValidatedTextBox.Style {
+		String label();
+	}
 
 	private final String label;
 
-	public @UiConstructor RichTextBox(String label) {
-		this(label, null);
+	public @UiConstructor RichTextBox(Style style, String label) {
+		this(style, label, null);
 	}
 	
-	public RichTextBox(String label, ValidationBundle<String> validationBundle) {
+	public RichTextBox(Style style, String label, ValidationBundle<String> validationBundle) {
+		super(style);
 		this.label = label != null ? label.trim() : "";
 		setValidationBundle(validationBundle);
 
@@ -26,7 +31,7 @@ public class RichTextBox extends ValidatedTextBox {
 			public void onBlur(BlurEvent event) {
 				if(RichTextBox.super.getText().equalsIgnoreCase("")){
 					setText(RichTextBox.this.label);
-					addStyleName("RichTextBox-labelStyle");
+					addStyleName(((Style)getStyle()).label());
 				}
 			}
 		});
@@ -38,12 +43,12 @@ public class RichTextBox extends ValidatedTextBox {
 				if(RichTextBox.super.getText().equalsIgnoreCase(RichTextBox.this.label)){
 					setText("");
 				}
-				removeStyleName("RichTextBox-labelStyle");
+				removeStyleName(((Style)getStyle()).label());
 			}
 		});
 
 		setText(label);
-		addStyleName("RichTextBox RichTextBox-labelStyle");
+		addStyleName(((Style)getStyle()).label());
 	}
 	
 	@Override
@@ -58,7 +63,7 @@ public class RichTextBox extends ValidatedTextBox {
 		}
 		
 		if(! text.equalsIgnoreCase(label)){
-			removeStyleName("RichTextBox-labelStyle");
+			removeStyleName(((Style)getStyle()).label());
 		}
 		
 		super.setText(text);

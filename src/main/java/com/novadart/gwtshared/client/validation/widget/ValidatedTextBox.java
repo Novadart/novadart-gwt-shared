@@ -17,14 +17,13 @@ implements HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusab
 
 	private final TextBox textBox = new TextBox();
 
-	public ValidatedTextBox(ValidationBundle<String> validationBundle) {
-		super(validationBundle);
+	public ValidatedTextBox(Style style, ValidationBundle<String> validationBundle) {
+		super(style, validationBundle);
 		initWidget(textBox);
-		addStyleName("ValidatedTextBox");
 	}
 
-	public ValidatedTextBox() {
-		this(null);
+	public ValidatedTextBox(Style style) {
+		this(style, null);
 	}
 
 	@Override

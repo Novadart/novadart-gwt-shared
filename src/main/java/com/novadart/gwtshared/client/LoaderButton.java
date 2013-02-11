@@ -1,10 +1,8 @@
 package com.novadart.gwtshared.client;
 
-import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Button;
@@ -12,35 +10,17 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.SimplePanel;
-import com.novadart.gwtshared.client.resources.ImageResources;
 
 public class LoaderButton extends Composite implements HasClickHandlers, HasText {
 	
-	public interface Style extends CssResource {
+	public static interface Style extends CssResource {
 		String button();
 		String loader();
-	}
-	
-	public interface DefaultBundle extends ClientBundle {
-		@Source("LoaderButton.css")
-		Style defaultStyle();
-	}
-	
-	private static DefaultBundle defaultBundle = null;
-	private static DefaultBundle defaultBundle() {
-		if(defaultBundle == null){
-			defaultBundle = (DefaultBundle)GWT.create(DefaultBundle.class);
-		}
-		return defaultBundle;
 	}
 
 	private final SimplePanel wrapper = new SimplePanel();
 	private final Button button = new Button();
 	private final Image loader = new Image();
-	
-	public LoaderButton() {
-		this(ImageResources.INSTANCE.loader(), defaultBundle().defaultStyle());
-	}
 	
 	public LoaderButton(ImageResource loaderImage, Style style) {
 		loader.setUrl(loaderImage.getSafeUri());
