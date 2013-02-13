@@ -3,6 +3,7 @@ package com.novadart.gwtshared.client.dialog;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -16,20 +17,25 @@ public class Dialog extends PopupPanel {
 
 	private int heightDivisionValue = HEIGHT_DIVISION_VALUE;
 	private int widthDivisionValue = WIDTH_DIVISION_VALUE;
+	
+	public static interface Style extends CssResource {
+		String dialog();
+		String focusableBody();
+	}
 
 	private final FocusPanel body = new FocusPanel();
 
-	public Dialog() {
-		this(true);
+	public Dialog(Style style) {
+		this(style, true);
 	}
 	
 	
-	public Dialog(boolean hideOnEscKey) {
+	public Dialog(Style style, boolean hideOnEscKey) {
 		setModal(true);
 		setGlassEnabled(true);
-		addStyleName("Dialog");
+		addStyleName(style.dialog());
 
-		body.setStyleName("Dialog-focusableBody");
+		body.setStyleName(style.focusableBody());
 		if(hideOnEscKey) {
 			body.addKeyUpHandler(new KeyUpHandler() {
 
