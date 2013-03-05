@@ -7,13 +7,13 @@ import com.novadart.gwtshared.client.validation.widget.ValidatedWidget;
 
 public abstract class CompositeValidation {
 	
-	private final List<ValidatedWidget<?, ?>> widgets = new ArrayList<ValidatedWidget<?, ?>>();
+	private final List<ValidatedWidget<?>> widgets = new ArrayList<ValidatedWidget<?>>();
 	private boolean valid = false;
 	
-	protected abstract boolean validate(List<ValidatedWidget<?, ?>> widgets);
+	protected abstract boolean validate(List<ValidatedWidget<?>> widgets);
 	public abstract String getErrorMessage();
 	
-	public void addWidget(ValidatedWidget<?, ?> widget){
+	public void addWidget(ValidatedWidget<?> widget){
 		widgets.add(widget);
 	}
 	
@@ -32,7 +32,7 @@ public abstract class CompositeValidation {
 	
 	public void reset(){
 		valid = false;
-		for (ValidatedWidget<?, ?> w : widgets) {
+		for (ValidatedWidget<?> w : widgets) {
 			w.reset();
 		}
 	}

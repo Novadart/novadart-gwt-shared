@@ -12,7 +12,7 @@ import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.TextBox;
 import com.novadart.gwtshared.client.validation.ValidationBundle;
 
-public class ValidatedTextBox extends ValidatedWidget<TextBox, String> 
+public class ValidatedTextBox extends FocusableValidatedWidget<TextBox, String> 
 implements HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusable {
 
 	private final TextBox textBox = new TextBox();
@@ -27,6 +27,11 @@ implements HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusab
 	}
 
 	@Override
+	protected TextBox getBaseWidget() {
+		return textBox;
+	}
+	
+	@Override
 	protected void resetUI() {
 		setText("");
 	}
@@ -37,8 +42,13 @@ implements HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusab
 	}
 
 	@Override
-	protected String getValue() {
+	public String getValue() {
 		return getText();
+	}
+	
+	@Override
+	public void setValue(String value) {
+		setText(value);
 	}
 
 	@Override

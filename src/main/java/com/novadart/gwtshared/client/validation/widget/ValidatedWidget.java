@@ -1,15 +1,11 @@
 package com.novadart.gwtshared.client.validation.widget;
 
-import com.google.gwt.event.dom.client.BlurEvent;
-import com.google.gwt.event.dom.client.BlurHandler;
-import com.google.gwt.event.dom.client.HasBlurHandlers;
 import com.google.gwt.resources.client.CssResource;
+import com.google.gwt.user.client.TakesValue;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FocusWidget;
-import com.google.gwt.user.client.ui.Widget;
 import com.novadart.gwtshared.client.validation.ValidationBundle;
 
-public abstract class ValidatedWidget<W extends HasBlurHandlers, ValueType> extends Composite {
+public abstract class ValidatedWidget<ValueType> extends Composite implements TakesValue<ValueType> {
 	
 	public static interface Style extends CssResource {
 		String validationOk();
@@ -44,18 +40,6 @@ public abstract class ValidatedWidget<W extends HasBlurHandlers, ValueType> exte
 		this.showMessageOnError = showMessageOnError;
 	}
 
-	@Override
-	protected void initWidget(Widget widget) {
-		super.initWidget(widget);
-
-		((FocusWidget)getWidget()).addBlurHandler(new BlurHandler() {
-
-			public void onBlur(BlurEvent event) {
-				validate();
-			}
-		});
-	}
-
 	public void setValidationBundle(ValidationBundle<ValueType> validationBundle) {
 		if(validationBundle == null) {
 			return;
@@ -73,8 +57,6 @@ public abstract class ValidatedWidget<W extends HasBlurHandlers, ValueType> exte
 	protected abstract void updateUI(boolean isValid);
 
 	protected abstract void resetUI();
-
-	protected abstract ValueType getValue();
 
 	public abstract boolean isEmpty();
 

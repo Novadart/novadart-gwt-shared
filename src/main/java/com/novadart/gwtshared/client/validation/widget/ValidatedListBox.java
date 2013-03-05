@@ -6,7 +6,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.ListBox;
 import com.novadart.gwtshared.client.validation.ValidationBundle;
 
-public class ValidatedListBox extends ValidatedWidget<ListBox, Integer> implements HasChangeHandlers {
+public class ValidatedListBox extends FocusableValidatedWidget<ListBox, Integer> implements HasChangeHandlers {
 	
 	private static class ValidatedListBoxBundle implements ValidationBundle<Integer>{
 		private final String errorMessage;
@@ -45,6 +45,11 @@ public class ValidatedListBox extends ValidatedWidget<ListBox, Integer> implemen
 	}
 	
 	@Override
+	protected ListBox getBaseWidget() {
+		return listBox;
+	}
+	
+	@Override
 	protected void updateUI(boolean isValid) {
 		
 	}
@@ -55,8 +60,13 @@ public class ValidatedListBox extends ValidatedWidget<ListBox, Integer> implemen
 	}
 	
 	@Override
-	protected Integer getValue() {
+	public Integer getValue() {
 		return getSelectedIndex();
+	}
+	
+	@Override
+	public void setValue(Integer value) {
+		listBox.setSelectedIndex(value==null?0:value);
 	}
 
 	public int getSelectedIndex(){

@@ -16,7 +16,7 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.novadart.gwtshared.client.validation.TextLengthValidation;
 import com.novadart.gwtshared.client.validation.ValidationBundle;
 
-public class ValidatedTextArea extends ValidatedWidget<TextArea, String> implements 
+public class ValidatedTextArea extends FocusableValidatedWidget<TextArea, String> implements 
 HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusable, HasEnabled {
 
 	private final TextArea textArea = new TextArea();
@@ -56,6 +56,11 @@ HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusable, HasEnab
 	
 	
 	@Override
+	protected TextArea getBaseWidget() {
+		return textArea;
+	}
+	
+	@Override
 	protected void updateUI(boolean isValid) {
 	}
 
@@ -65,8 +70,13 @@ HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusable, HasEnab
 	}
 
 	@Override
-	protected String getValue() {
+	public String getValue() {
 		return getText();
+	}
+	
+	@Override
+	public void setValue(String value) {
+		setText(value);
 	}
 	
 	@Override

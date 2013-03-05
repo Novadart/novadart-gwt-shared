@@ -12,11 +12,11 @@ import com.novadart.gwtshared.client.validation.widget.ValidatedWidget;
 public abstract class AlternativeValidation extends CompositeValidation {
 	
 	@Override
-	protected boolean validate(List<ValidatedWidget<?, ?>> widgets) {
+	protected boolean validate(List<ValidatedWidget<?>> widgets) {
 		boolean allValid = true;
 		boolean oneNotEmpty = false;
 		
-		for (ValidatedWidget<?, ?> w : widgets) {
+		for (ValidatedWidget<?> w : widgets) {
 			
 			if(w.isEmpty()){
 				w.setValidationOkStyle();
@@ -35,7 +35,7 @@ public abstract class AlternativeValidation extends CompositeValidation {
 		}
 		
 		if( ! (allValid && oneNotEmpty) ){
-			for (ValidatedWidget<?, ?> w : widgets) {
+			for (ValidatedWidget<?> w : widgets) {
 				w.setValidationErrorStyle();
 			}
 		}

@@ -13,8 +13,8 @@ import com.novadart.gwtshared.client.validation.widget.ValidatedWidget;
 public abstract class MandatoryValidation extends CompositeValidation {
 	
 	@Override
-	protected boolean validate(List<ValidatedWidget<?, ?>> widgets) {
-		for (ValidatedWidget<?, ?> w : widgets) {
+	protected boolean validate(List<ValidatedWidget<?>> widgets) {
+		for (ValidatedWidget<?> w : widgets) {
 			w.validate();
 			
 			if(!w.isValid()){
