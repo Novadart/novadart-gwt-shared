@@ -1,5 +1,6 @@
 package com.novadart.gwtshared.client.dialog;
 
+import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
@@ -67,6 +68,28 @@ public class Dialog extends PopupPanel {
 	protected void onLoad() {
 		super.onLoad();
 		body.setFocus(true);
+		
+		Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
+			
+			@Override
+			public void execute() {
+				setPopupPositionAndShow(new PositionCallback() {
+
+					@Override
+					public void setPosition(int offsetWidth, int offsetHeight) {
+						Window.scrollTo(0, 0);
+						
+						int windowHeight = Window.getClientHeight();
+						int windowWidth = Window.getClientWidth();
+
+						int x = (windowWidth - offsetWidth) / widthDivisionValue;
+						int y = (windowHeight - offsetHeight) / heightDivisionValue;
+
+						Dialog.this.setPopupPosition(x, y);
+					}
+				});
+			}
+		});
 	}
 
 	public void setHeightDivisionValue(int heightDivisionValue) {
@@ -77,27 +100,11 @@ public class Dialog extends PopupPanel {
 		this.widthDivisionValue = widthDivisionValue>0 ? widthDivisionValue : WIDTH_DIVISION_VALUE;
 	}
 
-	@Override
-	public void show() {
-		Window.scrollTo(0, 0);
-		super.show();
-	}
-
 	public void showCentered(){
-
-		setPopupPositionAndShow(new PositionCallback() {
-
-			@Override
-			public void setPosition(int offsetWidth, int offsetHeight) {
-				int windowHeight = Window.getClientHeight();
-				int windowWidth = Window.getClientWidth();
-
-				int x = (windowWidth - offsetWidth) / widthDivisionValue;
-				int y = (windowHeight - offsetHeight) / heightDivisionValue;
-
-				Dialog.this.setPopupPosition(x, y);
-			}
-		});
+		// this is needed because otherwise we have a bad effect of the dialog translating on the page
+		// position will be fixed in onLoad and then the dialog will be shown		
+		setVisible(false);
+		show();
 	}
 
 }
