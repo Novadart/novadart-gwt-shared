@@ -32,6 +32,7 @@ public class Dialog extends PopupPanel {
 	
 	
 	public Dialog(Style style, boolean hideOnEscKey) {
+		style.ensureInjected();
 		setModal(true);
 		setGlassEnabled(true);
 		addStyleName(style.dialog());
