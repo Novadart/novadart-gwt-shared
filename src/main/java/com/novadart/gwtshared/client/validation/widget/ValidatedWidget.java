@@ -7,6 +7,10 @@ import com.novadart.gwtshared.client.validation.ValidationBundle;
 
 public abstract class ValidatedWidget<ValueType> extends Composite implements TakesValue<ValueType> {
 	
+	public static interface Handler {
+		public void onValidation(boolean value);
+	}
+	
 	public static interface Style extends CssResource {
 		String validationOk();
 		String validationError();
@@ -19,6 +23,7 @@ public abstract class ValidatedWidget<ValueType> extends Composite implements Ta
 	private boolean showMessageOnError = true;
 	private ValidationBaloonMessage baloonMessage;
 	private ValidationBundle<ValueType> validationBundle;
+	private Handler handler;
 
 	public ValidatedWidget(Style style) {
 		this(style, null);
@@ -30,6 +35,10 @@ public abstract class ValidatedWidget<ValueType> extends Composite implements Ta
 		}
 		this.style = style;
 		this.style.ensureInjected();
+	}
+	
+	public void setHandler(Handler handler) {
+		this.handler = handler;
 	}
 	
 	protected Style getStyle() {
@@ -61,6 +70,10 @@ public abstract class ValidatedWidget<ValueType> extends Composite implements Ta
 	public abstract boolean isEmpty();
 
 	public void validate(){
+		validate(true);
+	}
+	
+	public void validate(boolean notifyHandler){
 		valid = true;
 
 		if(validationBundle == null){
@@ -78,9 +91,14 @@ public abstract class ValidatedWidget<ValueType> extends Composite implements Ta
 			}
 			setValidationErrorStyle();
 		}
+		
+		if(notifyHandler && this.handler != null){
+			this.handler.onValidation(valid);
+		}
 
 		updateUI(valid);
 	}
+	
 
 	public void reset() {
 		valid = false;
