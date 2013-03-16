@@ -68,7 +68,6 @@ public class Dialog extends PopupPanel {
 	@Override
 	protected void onLoad() {
 		super.onLoad();
-		body.setFocus(true);
 		
 		Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
 			
@@ -87,6 +86,7 @@ public class Dialog extends PopupPanel {
 						int y = (windowHeight - offsetHeight) / heightDivisionValue;
 
 						Dialog.this.setPopupPosition(x, y);
+						body.setFocus(true);
 					}
 				});
 			}
