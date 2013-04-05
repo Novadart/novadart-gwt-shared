@@ -16,6 +16,7 @@ public class ValidatedTextBox extends FocusableValidatedWidget<TextBox, String>
 implements HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusable {
 
 	private final TextBox textBox = new TextBox();
+	private boolean autoTrim = true;
 
 	public ValidatedTextBox(Style style, ValidationBundle<String> validationBundle) {
 		super(style, validationBundle);
@@ -26,6 +27,14 @@ implements HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusab
 		this(style, null);
 	}
 
+	public boolean isAutoTrim() {
+		return autoTrim;
+	}
+
+	public void setAutoTrim(boolean autoTrim) {
+		this.autoTrim = autoTrim;
+	}
+	
 	@Override
 	protected TextBox getBaseWidget() {
 		return textBox;
@@ -53,12 +62,12 @@ implements HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusab
 
 	@Override
 	public String getText() {
-		return textBox.getText();
+		return autoTrim ? textBox.getText().trim() : textBox.getText();
 	}
 
 	@Override
 	public void setText(String text) {
-		textBox.setText(text);
+		textBox.setText(text==null ? "" : (autoTrim ? text.trim() : text));
 	}
 
 	public void setReadOnly(boolean readonly){
