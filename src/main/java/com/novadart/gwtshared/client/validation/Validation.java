@@ -50,7 +50,15 @@ public class Validation {
 			return false;
 		}
 	}
+	
+	public static boolean isLongerThanSize(String string, int size){
+		return string.length() > size;
+	}
 
+	public static boolean isWithinSize(String string, int size){
+		return string.length() <= size;
+	}
+	
 	public static boolean isEmpty(String value){
 		return value==null || value.isEmpty();
 	}	
