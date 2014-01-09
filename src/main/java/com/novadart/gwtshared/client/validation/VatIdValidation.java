@@ -5,7 +5,7 @@ import com.novadart.gwtshared.client.RegularExpressionConstants;
 
 public abstract class VatIdValidation extends OptionalFieldValidation<String> {
 	
-	private static final RegExp VATID_REGEXP = 
+	public static final RegExp VATID_REGEXP = 
 			RegExp.compile(RegularExpressionConstants.VAT_ID_REGEX);
 	
 	
