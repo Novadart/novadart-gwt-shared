@@ -55,6 +55,14 @@ HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusable, HasEnab
 	}
 	
 	
+	public void setVisibleLines(int lines){
+		textArea.setVisibleLines(lines);
+	}
+	
+	public int getVisibleLines(){
+		return textArea.getVisibleLines();
+	}
+	
 	@Override
 	protected TextArea getBaseWidget() {
 		return textArea;
