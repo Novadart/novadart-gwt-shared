@@ -31,6 +31,8 @@ public class Dialog extends PopupPanel {
 	}
 	
 	
+	private boolean scrollWindowOnTop = true;
+	
 	public Dialog(Style style, boolean hideOnEscKey) {
 		style.ensureInjected();
 		setModal(true);
@@ -49,6 +51,14 @@ public class Dialog extends PopupPanel {
 				}
 			});
 		}
+	}
+	
+	public void setScrollWindowOnTop(boolean scrollWindowOnTop) {
+		this.scrollWindowOnTop = scrollWindowOnTop;
+	}
+	
+	public boolean isScrollWindowOnTop() {
+		return scrollWindowOnTop;
 	}
 
 	@Override
@@ -77,7 +87,9 @@ public class Dialog extends PopupPanel {
 
 					@Override
 					public void setPosition(int offsetWidth, int offsetHeight) {
-						Window.scrollTo(0, 0);
+						if(scrollWindowOnTop){
+							Window.scrollTo(0, 0);
+						}
 						
 						int windowHeight = Window.getClientHeight();
 						int windowWidth = Window.getClientWidth();
