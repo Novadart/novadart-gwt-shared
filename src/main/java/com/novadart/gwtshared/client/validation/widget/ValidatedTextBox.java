@@ -35,6 +35,14 @@ implements HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusab
 		this.autoTrim = autoTrim;
 	}
 	
+	public void setSelectionRange(int pos, int length){
+		textBox.setSelectionRange(pos, length);
+	}
+	
+	public void selectAll(){
+		textBox.selectAll();
+	}
+	
 	@Override
 	protected TextBox getBaseWidget() {
 		return textBox;

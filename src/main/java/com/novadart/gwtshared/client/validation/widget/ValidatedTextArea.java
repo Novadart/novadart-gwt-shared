@@ -63,6 +63,14 @@ HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusable, HasEnab
 		return textArea.getVisibleLines();
 	}
 	
+	public void setSelectionRange(int pos, int length){
+		textArea.setSelectionRange(pos, length);
+	}
+	
+	public void selectAll(){
+		textArea.selectAll();
+	}
+	
 	@Override
 	protected TextArea getBaseWidget() {
 		return textArea;
