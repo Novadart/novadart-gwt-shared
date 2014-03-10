@@ -7,11 +7,12 @@ import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HasEnabled;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.SimplePanel;
 
-public class LoaderButton extends Composite implements HasClickHandlers, HasText {
+public class LoaderButton extends Composite implements HasClickHandlers, HasText, HasEnabled {
 	
 	public static interface Style extends CssResource {
 		String button();
@@ -60,6 +61,16 @@ public class LoaderButton extends Composite implements HasClickHandlers, HasText
 	@Override
 	public void setText(String text) {
 		button.setText(text);
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return button.isEnabled();
+	}
+
+	@Override
+	public void setEnabled(boolean enabled) {
+		button.setEnabled(enabled);
 	}
 	
 }
