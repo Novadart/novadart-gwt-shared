@@ -5,7 +5,11 @@ import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.dom.client.HasBlurHandlers;
 import com.google.gwt.event.dom.client.HasFocusHandlers;
+import com.google.gwt.event.dom.client.HasKeyDownHandlers;
+import com.google.gwt.event.dom.client.HasKeyPressHandlers;
 import com.google.gwt.event.dom.client.HasKeyUpHandlers;
+import com.google.gwt.event.dom.client.KeyDownHandler;
+import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -17,7 +21,7 @@ import com.novadart.gwtshared.client.validation.TextLengthValidation;
 import com.novadart.gwtshared.client.validation.ValidationBundle;
 
 public class ValidatedTextArea extends FocusableValidatedWidget<TextArea, String> implements 
-HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusable, HasEnabled {
+HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, HasKeyDownHandlers, HasKeyPressHandlers, Focusable, HasEnabled {
 
 	private final TextArea textArea = new TextArea();
 	
@@ -54,7 +58,6 @@ HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusable, HasEnab
 		});
 	}
 	
-	
 	public void setVisibleLines(int lines){
 		textArea.setVisibleLines(lines);
 	}
@@ -67,12 +70,20 @@ HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusable, HasEnab
 		textArea.setSelectionRange(pos, length);
 	}
 	
+	public int getSelectionLength(){
+		return textArea.getSelectionLength();
+	}
+	
+	public String getSelectedText(){
+		return textArea.getSelectedText();
+	}
+	
 	public void selectAll(){
 		textArea.selectAll();
 	}
 	
 	@Override
-	protected TextArea getBaseWidget() {
+	public TextArea getBaseWidget() {
 		return textArea;
 	}
 	
@@ -128,6 +139,16 @@ HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusable, HasEnab
 	@Override
 	public HandlerRegistration addBlurHandler(BlurHandler handler) {
 		return textArea.addBlurHandler(handler);
+	}
+	
+	@Override
+	public HandlerRegistration addKeyPressHandler(KeyPressHandler handler) {
+		return textArea.addKeyPressHandler(handler);
+	}
+	
+	@Override
+	public HandlerRegistration addKeyDownHandler(KeyDownHandler handler) {
+		return textArea.addKeyDownHandler(handler);
 	}
 
 	@Override

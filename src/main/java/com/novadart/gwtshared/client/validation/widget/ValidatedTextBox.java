@@ -44,7 +44,7 @@ implements HasText, HasBlurHandlers, HasFocusHandlers, HasKeyUpHandlers, Focusab
 	}
 	
 	@Override
-	protected TextBox getBaseWidget() {
+	public TextBox getBaseWidget() {
 		return textBox;
 	}
 	

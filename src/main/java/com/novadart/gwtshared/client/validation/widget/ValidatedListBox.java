@@ -45,7 +45,7 @@ public class ValidatedListBox extends FocusableValidatedWidget<ListBox, Integer>
 	}
 	
 	@Override
-	protected ListBox getBaseWidget() {
+	public ListBox getBaseWidget() {
 		return listBox;
 	}
 	

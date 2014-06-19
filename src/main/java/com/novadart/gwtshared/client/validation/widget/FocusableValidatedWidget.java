@@ -17,7 +17,7 @@ public abstract class FocusableValidatedWidget<W extends HasBlurHandlers, ValueT
 		super(style, validationBundle);
 	}
 	
-	protected abstract W getBaseWidget();
+	public abstract W getBaseWidget();
 	
 	@Override
 	protected void initWidget(Widget widget) {
